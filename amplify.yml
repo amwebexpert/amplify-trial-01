@@ -6,7 +6,7 @@ backend:
         - echo "Installing AWS CDK"
         - npm install -g aws-cdk
         - echo "Bootstrapping CDK for account 032068930018 in region us-east-1"
-        - cdk bootstrap aws://032068930018/us-east-1 --require-approval never
+        - cdk bootstrap aws://032068930018/us-east-1 --require-approval never --qualifier hnb659fds
     build:
       commands:
         - npm ci --cache .npm --prefer-offline
