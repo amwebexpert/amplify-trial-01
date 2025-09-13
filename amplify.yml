@@ -1,6 +1,12 @@
 version: 1
 backend:
   phases:
+    preBuild:
+      commands:
+        - echo "Installing AWS CDK"
+        - npm install -g aws-cdk
+        - echo "Bootstrapping CDK for account $AWS_DEFAULT_ACCOUNT_ID in region $AWS_DEFAULT_REGION"
+        - cdk bootstrap aws://$AWS_DEFAULT_ACCOUNT_ID/$AWS_DEFAULT_REGION --require-approval never
     build:
       commands:
         - npm ci --cache .npm --prefer-offline
