@@ -5,8 +5,12 @@ backend:
       commands:
         - echo "Installing AWS CDK"
         - npm install -g aws-cdk
-        - echo "Bootstrapping CDK for account 032068930018 in region us-east-1"
-        - cdk bootstrap aws://032068930018/us-east-1 --require-approval never --qualifier hnb659fds
+        - echo "Cleaning up any existing bootstrap"
+        - aws cloudformation delete-stack --stack-name CDKToolkit --region us-east-1 || true
+        - echo "Waiting for stack deletion..."
+        - sleep 30
+        - echo "Bootstrapping CDK with fresh stack"
+        - cdk bootstrap aws://032068930018/us-east-1 --require-approval never
     build:
       commands:
         - npm ci --cache .npm --prefer-offline
