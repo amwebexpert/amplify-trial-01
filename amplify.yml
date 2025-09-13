@@ -1,16 +1,6 @@
 version: 1
 backend:
   phases:
-    preBuild:
-      commands:
-        - echo "Installing AWS CDK"
-        - npm install -g aws-cdk
-        - echo "Removing existing CDK bootstrap stack"
-        - aws cloudformation delete-stack --stack-name CDKToolkit --region us-east-1 || echo "Stack doesn't exist, continuing..."
-        - echo "Waiting for stack deletion to complete..."
-        - aws cloudformation wait stack-delete-complete --stack-name CDKToolkit --region us-east-1 || echo "Delete complete or stack didn't exist"
-        - echo "Creating fresh CDK bootstrap"
-        - cdk bootstrap aws://032068930018/us-east-1 --require-approval never --force
     build:
       commands:
         - npm ci --cache .npm --prefer-offline
