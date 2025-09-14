@@ -6,7 +6,7 @@ import type { Schema, TodoType } from "../amplify/data/resource";
 const client = generateClient<Schema>();
 
 function App() {
-  const { signOut } = useAuthenticator();
+  const { user, signOut } = useAuthenticator();
   const [todos, setTodos] = useState<TodoType[]>([]);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function App() {
 
   return (
     <main>
-      <h1>My TODOs List</h1>
+      <h2>{user?.signInDetails?.loginId}'s TODOs List</h2>
 
       <button onClick={createTodo}>+ new</button>
 
