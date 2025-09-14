@@ -16,6 +16,8 @@ const schema = a.schema({
 
 export type Schema = ClientSchema<typeof schema>;
 
+export type TodoType = Schema["Todo"]["type"];
+
 export const data = defineData({
   schema,
   authorizationModes: {
